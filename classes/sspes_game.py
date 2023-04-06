@@ -257,14 +257,14 @@ class SSPES_Game:
         exit()
         
     def upload_player_statistics(self):
-        with open("player_save.txt", "r") as rd:
+        with open("player_save.json", "r") as rd:
             save = json.load(rd)
         requests.put(self.website_url + "upload_stats", json=save)
         print("uploaded")
               
     def get_plays_statistic(self, player):
         name = player.get_name()
-        with open("player_save.txt", "r") as rd:
+        with open("player_save.json", "r") as rd:
             saves = json.load(rd)     
         return saves[name]
 
@@ -295,12 +295,12 @@ class SSPES_Game:
 
     def save_player_event(self, event):
         name = self.player.get_name()
-        with open("player_save.txt", "r") as rd:
+        with open("player_save.json", "r") as rd:
             saves = json.load(rd)
 
         saves[name][event] +=1
 
-        with open("player_save.txt", "w") as wd:
+        with open("player_save.json", "w") as wd:
             wd.write(json.dumps(saves))
 
     def create_statistic(self):
