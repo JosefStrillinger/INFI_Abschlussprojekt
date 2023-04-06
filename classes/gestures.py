@@ -24,7 +24,8 @@ PINKY_TIP = 20
 
 def is_stein(points):
     return points[MIDDLE_FINGER_MCP].y > points[MIDDLE_FINGER_PIP].y and points[PINKY_MCP].y > points[PINKY_PIP].y and \
-        points[RING_FINGER_MCP].y > points[RING_FINGER_PIP].y and points[INDEX_FINGER_MCP].y > points[INDEX_FINGER_PIP].y
+        points[RING_FINGER_MCP].y > points[RING_FINGER_PIP].y and points[INDEX_FINGER_MCP].y > points[INDEX_FINGER_PIP].y and \
+            points[THUMB_CMC].y > points[THUMB_TIP].y
 
 def is_schere(points):
     return points[INDEX_FINGER_TIP].y > points[INDEX_FINGER_DIP].y and points[MIDDLE_FINGER_TIP].y > points[MIDDLE_FINGER_DIP].y and \
@@ -45,4 +46,9 @@ def is_spock(points):
 
 def is_echse(points):
     return points[INDEX_FINGER_PIP].y > points[INDEX_FINGER_TIP].y and points[MIDDLE_FINGER_PIP].y > points[MIDDLE_FINGER_TIP].y and \
-        points[RING_FINGER_PIP].y > points[RING_FINGER_TIP].y and points[PINKY_PIP].y > points[PINKY_TIP].y
+        points[RING_FINGER_PIP].y > points[RING_FINGER_TIP].y and points[PINKY_PIP].y > points[PINKY_TIP].y and \
+            points[INDEX_FINGER_PIP].y > points[INDEX_FINGER_MCP].y and points[MIDDLE_FINGER_PIP].y > points[MIDDLE_FINGER_MCP].y and \
+                points[RING_FINGER_PIP].y > points[RING_FINGER_MCP].y and points[PINKY_PIP].y > points[PINKY_MCP].y
+
+
+# TODO: Gesten umschreiben, weil sie bisher noch falsch erkannt werden
