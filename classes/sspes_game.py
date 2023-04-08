@@ -12,6 +12,8 @@ from classes.player import Player
 from classes.difficulty import Difficulty
 from classes.command import Command
 from classes.command_manager import Command_Manager
+from classes.gesture_detection import gesture_detection
+from classes.playstyle import Playstyle
 
 class SSPES_Game:
     def __init__(self):
@@ -24,6 +26,7 @@ class SSPES_Game:
         self.play_statistic = self.create_statistic()
         self.command_manager = Command_Manager()
         self.website_url = "http://127.0.0.1:5000/"
+        self.playstyle = Playstyle.Gestures
         exit = Command(self.end_game, "-e")
         play = Command(self.play, "-p")
         reset = Command(self.start, "-r")
@@ -41,24 +44,46 @@ class SSPES_Game:
     def play(self):
         playing = True
         comp_options = self.create_computer_options()
-        while(playing):          
-            a = input("Input a number of your choosing (1-5): ")
-            if str(a).lower() == "-m":
-                self.input_menu_command()
-                 
-            while not a.isnumeric() or int(a) not in range(1, 5+1):
-                if str(a).lower() == "-m":
-                    self.command_manager.run_cmd("-m")
-                if str(a).lower() == "-e":
-                    self.command_manager.run_cmd("-e")
-                print("Please enter a valid number")
+        while(playing):  
+            if self.playstyle == Playstyle.Normal:
                 a = input("Input a number of your choosing (1-5): ")
+                if str(a).lower() == "-m":
+                    self.input_menu_command()
+
+                while not a.isnumeric() or int(a) not in range(1, 5+1):
+                    if str(a).lower() == "-m":
+                        self.command_manager.run_cmd("-m")
+                    if str(a).lower() == "-e":
+                        self.command_manager.run_cmd("-e")
+                    print("Please enter a valid number")
+                    a = input("Input a number of your choosing (1-5): ")
+
+                #print(obj.get_weak_to())
+                print("\nGlobal stats for player: ")
+                player_percent_stats = self.get_statistic_percentage(self.get_plays_statistic(self.player))
+                print("")
+                obj = self.play_input_handler(a)
                 
-            #print(obj.get_weak_to())
-            print("\nGlobal stats for player: ")
-            player_percent_stats = self.get_statistic_percentage(self.get_plays_statistic(self.player))
-            print("")
-            obj = self.play_input_handler(a)
+            if self.playstyle == Playstyle.Gestures:
+                a = input("Input either one of the commands or -g for continuing: ")
+                if str(a).lower() == "-m":
+                    self.input_menu_command()
+
+                while not a.isnumeric() or int(a) not in range(1, 5+1):
+                    if str(a).lower() == "-m":
+                        self.command_manager.run_cmd("-m")
+                    if str(a).lower() == "-e":
+                        self.command_manager.run_cmd("-e")
+                    print("Please enter a valid number")
+                    a = input("Input a number of your choosing (1-5): ")
+                
+                if str(a).lower() == "-g":
+                    #print(obj.get_weak_to())
+                    print("\nGlobal stats for player: ")
+                    player_percent_stats = self.get_statistic_percentage(self.get_plays_statistic(self.player))
+                    print("")
+                    turn = gesture_detection()
+                    obj = self.play_input_handler(turn)
             
             if self.difficulty == Difficulty.normal:
                 comp_turn = random.choice(comp_options)
