@@ -69,14 +69,6 @@ class SSPES_Game:
                 if str(a).lower() == "-m":
                     self.input_menu_command()
 
-                while not a.isnumeric() or int(a) not in range(1, 5+1):
-                    if str(a).lower() == "-m":
-                        self.command_manager.run_cmd("-m")
-                    if str(a).lower() == "-e":
-                        self.command_manager.run_cmd("-e")
-                    print("Please enter a valid number")
-                    a = input("Input a number of your choosing (1-5): ")
-                
                 if str(a).lower() == "-g":
                     #print(obj.get_weak_to())
                     print("\nGlobal stats for player: ")

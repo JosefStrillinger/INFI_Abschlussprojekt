@@ -22,23 +22,19 @@ while True:
     success, img = cap.read()
 
     width = img.shape[1]
-    
-    #width_cutoff = width // 2
 
     img1 = img[:, :width]
 
     imgRGB = cv2.cvtColor(img1, cv2.COLOR_BGR2RGB)
     results = hands.process(imgRGB)
-    #print(results.multi_hand_landmarks)Githu
     
     if results.multi_hand_landmarks:
         for handLms in results.multi_hand_landmarks:
             landmarks = handLms.landmark
             for id, lm in enumerate(landmarks):
-                #print(id, lm)
                 h, w , c = img1.shape
                 cx, cy = int(lm.x*w), int(lm.y*h)
-                #print(id, cx, cy)
+
                 if id == 0:
                     cv2.circle(img1, (cx,cy), 4, (255,0,255), cv2.FILLED)
                 
@@ -63,5 +59,5 @@ while True:
     cv2.putText(img1, str(int(fps)), (10,70), cv2.FONT_HERSHEY_PLAIN, 3, (255,0,255), 3)
     
     cv2.imshow("Hand-Tracking", img1)
-    cv2.waitKey(1000)
+    cv2.waitKey(1)
     

@@ -84,8 +84,7 @@ if __name__ == '__main__':
     app.debug=True
     app.run()
     
-#TODO:
-# html, css, implement methods and find a way to play game from browser 
+
 
 
 

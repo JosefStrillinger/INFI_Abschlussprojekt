@@ -45,5 +45,3 @@ def is_stein(points): # works
         points[RING_FINGER_MCP].y < points[RING_FINGER_PIP].y and points[PINKY_MCP].y < points[PINKY_PIP].y and \
             points[THUMB_CMC].y < points[THUMB_IP].y
 
-
-# TODO: Gesten umschreiben, weil sie bisher noch falsch erkannt werden
